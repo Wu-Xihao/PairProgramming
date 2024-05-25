@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class DataStructure {
 
-    public static int Rows;
-    public static int Cols;
+    public static int Rows=30;
+    public static int Cols=60;
     public static Cell Cells[][];
 
     //枚举类型：细胞状态（存活和死亡）

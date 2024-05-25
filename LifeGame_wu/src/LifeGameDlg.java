@@ -1,4 +1,8 @@
+import javax.print.attribute.standard.JobName;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.*;
 
 import static Data.DataStructure.Cols;
@@ -11,9 +15,12 @@ public class LifeGameDlg extends JDialog {
     private JButton NextBtn;
     private JButton SetBtn;
     private JButton ReadyBtn;
-    private JPanel OutPanel;
+    private JPanel ControlPanel;
     private JPanel BtnPanel;
     private JPanel MapPanel;
+    private JTable MapTable;
+    //private DefaultTableModel TableModel;
+    private JButton MapBtn;
     private int rows;
     private int cols;
     private int size;
@@ -23,9 +30,13 @@ public class LifeGameDlg extends JDialog {
     private int MinHeight;
     private int MaxWidth;
     private int MinWidth;
+    private Color DeadColor;
+    private Color AliveColor;
 
 
     public LifeGameDlg() {
+        init();
+        setWindow();
         // call onCancel() when cross is clicked
         //点击关闭按钮响应
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -83,29 +94,50 @@ public class LifeGameDlg extends JDialog {
     }
 
     public void init(){
-        MaxHeight=2400;
-        MinHeight=800;
-        MaxWidth=1500;
-        MinWidth=500;
-        size=40;
+        MaxHeight=1200;
+        MinHeight=600;
+        MaxWidth=1600;
+        MinWidth=800;
+        size=15;
         rows=Rows;
         cols=Cols;
         sizeX=Math.max(MinWidth,size*cols);
         sizeX=Math.min(MaxWidth,sizeX);
         sizeY=Math.max(MinHeight,size*rows);
         sizeY=Math.min(MaxHeight,sizeY);
+        DeadColor=Color.white;
+        AliveColor=Color.CYAN;
     }
     public void setWindow(){
         this.setTitle("Conways's Game of Life");
         //将自定义的内容面板设置为对话框的内容面板
+        //ContentPanel=new JPanel(new BorderLayout());
+        //ContentPanel.add(MapPanel,"Center");
+        //ContentPanel.add(ControlPanel,"South");
         this.setContentPane(ContentPanel);
         //设置对话框模块，对话框打开时，用户无法与其它窗口进行交互
         this.setModal(true);
-        //设置窗口大小
-        this.setSize(sizeX,sizeY);
+        //设置Map大小
+//        TableModel = (DefaultTableModel) MapTable.getModel();
+//        TableModel.setRowCount(0);
+//        for(int i=0;i<cols;i++){
+//            TableModel.addColumn(null);
+//        }
+//        for(int i=0;i<rows;i++){
+//            Object[] rowData=new Object[cols];
+//            TableModel.addRow(rowData);
+//        }
+//        MapTable.setRowHeight(size);
+//        for(int i=0;i<cols;i++){
+//            TableColumn column=MapTable.getColumnModel().getColumn(i);
+//            column.setPreferredWidth(size);
+//        }
 
-        this.setResizable(false);
+        //自适应窗口大小
+        this.pack();
+        //设置居中显示
         this.setLocationRelativeTo(null);
+        //设置窗体可见
         this.setVisible(true);
     }
     public void ready(){
@@ -134,8 +166,7 @@ public class LifeGameDlg extends JDialog {
 
     public static void main(String[] args) {
         LifeGameDlg dialog = new LifeGameDlg();
-        dialog.pack();
-        dialog.setVisible(true);
+
         System.exit(0);
     }
 }

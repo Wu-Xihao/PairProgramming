@@ -11,7 +11,7 @@ import static Data.DataStructure.Cell;
 public class Map {
     private int rows;
     private int cols;
-    private Cell[][] cells;
+    public Cell[][] cells;
     public Map(int rows,int cols){
         this.rows=rows;
         this.cols=cols;
@@ -39,22 +39,26 @@ public class Map {
     }
 
     //更新下一代生命地图
-    public void nextMap(){
+    public void nextMap(Map lastMap){
         for(int i=1;i<=rows;i++){
             for(int j=1;j<=cols;j++){
-                int aliveNum=detectCell(i,j);
-                if(cells[i][j].getStatus()==ALIVE){
+                int aliveNum=lastMap.detectCell(i,j);
+                if(lastMap.cells[i][j].getStatus()==ALIVE){
                     //细胞为存活状态
                     //若周围存活细胞数小于2或大于3，该细胞下一代死亡
                     if(aliveNum<2||aliveNum>3){
                         cells[i][j].setStatus(DEAD);
+                    }else{
+                        cells[i][j].setStatus(ALIVE);
                     }
                 }
-                else if(cells[i][j].getStatus()==DEAD){
+                else if(lastMap.cells[i][j].getStatus()==DEAD){
                     //细胞为死亡状态
                     //若周围存活细胞数为3，该细胞下一代存活
                     if(aliveNum==3){
                         cells[i][j].setStatus(ALIVE);
+                    }else{
+                        cells[i][j].setStatus(DEAD);
                     }
                 }
             }
