@@ -12,8 +12,6 @@ public class GameOfLifeSample {
         int[][] board = new int[SIZE][SIZE];
 
         // 初始化游戏板，设置一些初始状态
-        board[1][2] = 1;
-        board[2][3] = 1;
         board[3][1] = 1;
         board[3][2] = 1;
         board[3][3] = 1;

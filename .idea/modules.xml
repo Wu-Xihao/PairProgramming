@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LifeGame/LifeGame.iml" filepath="$PROJECT_DIR$/LifeGame/LifeGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LifeGame_Wu_DetectedFixedJc/LifeGame_Wu_DetectedFixedJc.iml" filepath="$PROJECT_DIR$/LifeGame_Wu_DetectedFixedJc/LifeGame_Wu_DetectedFixedJc.iml" />
       <module fileurl="file://$PROJECT_DIR$/LifeGame_wu/LifeGame_wu.iml" filepath="$PROJECT_DIR$/LifeGame_wu/LifeGame_wu.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/PairProgramming.iml" filepath="$PROJECT_DIR$/.idea/PairProgramming.iml" />
     </modules>

@@ -26,7 +26,7 @@ public class Map {
         cells=new Cell[rows+2][cols+2];
         for(int i=0;i<rows+2;i++){
             for(int j=0;j<cols+2;j++){
-                cells[i][j]=new DataStructure.Cell(i,j, DEAD);
+                cells[i][j]=new Cell(i,j, DEAD);
             }
         }
     }
@@ -94,32 +94,7 @@ public class Map {
 
     //检测周围细胞存活数量
     public int detectCell(int row,int col){
-        /*int num=0;
-        if(cells[x-1][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x+1][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x-1][y+1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x+1][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x+1][y-1].getStatus()==ALIVE){
-            num++;
-        }
-        if(cells[x+1][y+1].getStatus()==ALIVE){
-            num++;
-        }*/
-        //return num;
+
 
         int liveNeighbors = 0;
 
