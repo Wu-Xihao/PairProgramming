@@ -113,11 +113,6 @@ public class GameForm{
             StopBtn.setText("Stop");
         }
         map.randomMap();
-        for(int i=1;i<=rows;i++){
-            for(int j=1;j<=cols;j++){
-                lastMap.cells[i][j]=map.cells[i][j];
-            }
-        }
         updateMap();
     }
 
@@ -165,7 +160,7 @@ public class GameForm{
         }
         for(int i=1;i<=rows;i++){
             for(int j=1;j<=cols;j++){
-                lastMap.cells[i][j]=map.cells[i][j];
+                lastMap.cells[i][j].setStatus(map.cells[i][j].getStatus());
             }
         }
     }

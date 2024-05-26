@@ -29,10 +29,10 @@ public class Map {
         for(int i=1;i<=rows;i++){
             for(int j=1;j<=cols;j++){
                 int randomInt=random.nextInt()%3;
-                if(randomInt==0||randomInt==2){
-                    cells[i][j].setStatus(DEAD);
-                }else{
+                if(randomInt==1){
                     cells[i][j].setStatus(ALIVE);
+                }else{
+                    cells[i][j].setStatus(DEAD);
                 }
             }
         }
