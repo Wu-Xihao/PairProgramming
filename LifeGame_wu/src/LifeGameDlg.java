@@ -5,8 +5,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
 
-import static Data.DataStructure.Cols;
-import static Data.DataStructure.Rows;
+import static Data.DataStructure.COLS;
+import static Data.DataStructure.ROWS;
 
 public class LifeGameDlg extends JDialog {
     private JPanel ContentPanel;
@@ -99,8 +99,8 @@ public class LifeGameDlg extends JDialog {
         MaxWidth=1600;
         MinWidth=800;
         size=15;
-        rows=Rows;
-        cols=Cols;
+        rows=ROWS;
+        cols=COLS;
         sizeX=Math.max(MinWidth,size*cols);
         sizeX=Math.min(MaxWidth,sizeX);
         sizeY=Math.max(MinHeight,size*rows);

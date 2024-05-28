@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import static Data.DataStructure.CellStatus.ALIVE;
-import static Data.DataStructure.Cols;
-import static Data.DataStructure.Rows;
+import static Data.DataStructure.CellStatus.DEAD;
+import static Data.DataStructure.COLS;
+import static Data.DataStructure.ROWS;
+import static Data.DataStructure.ALIVECOLOR;
 
-public class GameForm{
+public class GameForm implements SetForm.SetFormListener{
 
     private JFrame Frame;
     private JPanel OutPanel;
@@ -31,15 +33,15 @@ public class GameForm{
     private int rows;
     private int cols;
     private int size;
-    private int sizeX;
-    private int sizeY;
     private Color DeadColor;
     private Color AliveColor;
+    private SetForm set;
 
 
     public GameForm() {
         init();
         setWindow();
+        mapBtnsListener();
         timer=new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,11 +78,24 @@ public class GameForm{
                 set();
             }
         });
+
+//        for(int i=0;i<rows;i++){
+//            for(int j=0;j<cols;j++){
+//                int finalI = i;
+//                int finalJ = j;
+//                MapBtns[i][j].addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        clickMapBtn(finalI, finalJ);
+//                    }
+//                });
+//            }
+//        }
     }
     public void init(){
         size=20;
-        rows=Rows;
-        cols=Cols;
+        rows=ROWS;
+        cols=COLS;
         DeadColor=Color.white;
         AliveColor=Color.CYAN;
         map=new Map(rows,cols);
@@ -98,6 +113,7 @@ public class GameForm{
                 CenterPanel.add(MapBtns[i][j]);
             }
         }
+        Frame.setTitle("生命游戏");
         Frame.setContentPane(OutPanel);
         Frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Frame.pack();
@@ -106,6 +122,7 @@ public class GameForm{
     }
 
     public void ready(){
+        timer.stop();
         if(!Objects.equals(StartBtn.getText(), "Start")){
             StartBtn.setText("Start");
         }
@@ -134,7 +151,6 @@ public class GameForm{
             timer.start();
             StopBtn.setText("Stop");
         }
-        timer.stop();
 
     }
 
@@ -145,7 +161,15 @@ public class GameForm{
     }
 
     public void set(){
+        showSetForm();
+    }
 
+    public void clickMapBtn(int i,int j){
+        if(map.cells[i+1][j+1].getStatus()==DEAD){
+            map.cells[i+1][j+1].setStatus(ALIVE);
+            lastMap.cells[i+1][j+1].setStatus(ALIVE);
+            MapBtns[i][j].setBackground(AliveColor);
+        }
     }
 
     public void updateMap(){
@@ -164,10 +188,58 @@ public class GameForm{
             }
         }
     }
+    private void showSetForm() {
+        SetForm setForm = new SetForm(rows, cols, AliveColor);
+        setForm.setSetFormListener(this); // 将父窗体自身注册为监听器
+        setForm.Frame.setVisible(true);
+    }
+    public void mapBtnsListener(){
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                int finalI = i;
+                int finalJ = j;
+                MapBtns[i][j].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        clickMapBtn(finalI, finalJ);
+                    }
+                });
+            }
+        }
+    }
+
+    @Override
+    public void onSetFormSubmit(int rows, int cols, Color aliveColor) {
+        // 处理接收到的 rows, cols, aliveColor 值，例如更新父窗体中的数据和界面
+        this.rows = rows;
+        this.cols = cols;
+        this.AliveColor = aliveColor;
+        // ... 更新界面等操作 ...
+        // 移除所有按钮
+        CenterPanel.removeAll();
+        // 重新设置布局
+        CenterPanel.setLayout(new GridLayout(rows, cols));
+        map=new Map(rows,cols);
+        lastMap=new Map(rows,cols);
+        MapBtns=new JButton[rows][cols];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                MapBtns[i][j]=new JButton("");
+                MapBtns[i][j].setPreferredSize(new Dimension(size, size));
+                MapBtns[i][j].setBackground(DeadColor);
+                CenterPanel.add(MapBtns[i][j]);
+            }
+        }
+        mapBtnsListener();
+        CenterPanel.repaint();
+        updateMap();
+        Frame.pack();
+        Frame.setLocationRelativeTo(null);
+    }
+
 
 
     public static void main(String[] args){
         GameForm gameForm=new GameForm();
-
     }
 }
