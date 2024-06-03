@@ -8,7 +8,7 @@ public class DataStructure {
     public static int ROWS=30;
     public static int COLS=60;
     public static Color ALIVECOLOR=Color.CYAN;
-    public static Cell Cells[][];
+    //public static Cell Cells[][];
 
     //枚举类型：细胞状态（存活和死亡）
     public enum CellStatus{

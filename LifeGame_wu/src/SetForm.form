@@ -13,7 +13,7 @@
           <gridbag top="20" left="20" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value="行数(10~45)："/>
+          <text value="行数(10~40)："/>
         </properties>
       </component>
       <component id="24a56" class="javax.swing.JLabel" binding="ColLabel">

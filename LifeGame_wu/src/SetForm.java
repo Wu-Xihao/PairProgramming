@@ -31,6 +31,9 @@ public class SetForm {
 
     public SetForm(int rows,int cols,Color c){
         flag=true;
+        Rows=rows;
+        Cols=cols;
+        AliveColor=c;
         ColorChooser=new JColorChooser();
         ColorChooser.setColor(c);
         RowText.setText(String.valueOf(rows));
@@ -44,13 +47,13 @@ public class SetForm {
         RowText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getRows();
+                changeRows();
             }
         });
         ColText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getCols();
+                changeCols();
             }
         });
         SelectBtn.addActionListener(new ActionListener() {
@@ -78,12 +81,14 @@ public class SetForm {
             }
         });
     }
-    public int getRows(){
+    public int changeRows(){
         String s=RowText.getText();
         int rows=30;
         try{
             rows=Integer.parseInt(s);
-            if(rows<10||rows>45){
+            if(rows<10||rows>40){
+                rows=30;
+                RowText.setText(String.valueOf(Rows));
                 throw new Exception("超出限制");
             }
         }catch(Exception e){
@@ -92,12 +97,14 @@ public class SetForm {
         }
         return rows;
     }
-    public int getCols(){
+    public int changeCols(){
         String s=ColText.getText();
         int cols=60;
         try{
             cols=Integer.parseInt(s);
             if(cols<20||cols>80){
+                cols=60;
+                ColText.setText(String.valueOf(Cols));
                 throw new Exception("超出限制");
             }
         }catch(Exception e){
@@ -111,8 +118,8 @@ public class SetForm {
     }
     public void ok(){
         flag=true;
-        Rows=getRows();
-        Cols=getCols();
+        Rows=changeRows();
+        Cols=changeCols();
         AliveColor=getAliveColor();
         if(flag) {
             ROWS=Rows;
@@ -127,6 +134,31 @@ public class SetForm {
 
     public interface SetFormListener {
         void onSetFormSubmit(int rows, int cols, Color aliveColor);
+    }
+
+    public JTextField getRowText(){
+        return RowText;
+    }
+    public JTextField getColText(){
+        return ColText;
+    }
+    public JButton getOkButton(){
+        return OkButton;
+    }
+    public JButton getCancelButton(){
+        return CancelButton;
+    }
+    public boolean getFlag(){
+        return flag;
+    }
+    public void setFlag(boolean flag){
+        this.flag=flag;
+    }
+    public int getRows(){
+        return Rows;
+    }
+    public int getCols(){
+        return Cols;
     }
 
     public static void main(String[] args){

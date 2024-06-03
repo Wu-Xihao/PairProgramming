@@ -12,14 +12,7 @@ public class Map {
     private int rows;
     private int cols;
     public Cell[][] cells;
-
-
-    //更新的部分，定义了一个表示方向的成员
-    private static final int[][] directions = {
-            {-1, -1}, {-1, 0}, {-1, 1},
-            {0, -1},         {0, 1},
-            {1, -1}, {1, 0}, {1, 1}
-    };
+    //构造函数
     public Map(int rows,int cols){
         this.rows=rows;
         this.cols=cols;
@@ -30,7 +23,13 @@ public class Map {
             }
         }
     }
-
+    //更新的部分，定义了一个表示方向的成员
+    private static final int[][] directions = {
+            {-1, -1}, {-1, 0},
+            {-1, 1}, {0, -1},
+            {0, 1}, {1, -1},
+            {1, 0}, {1, 1}
+    };
     //随机生成生命地图
     public void randomMap(){
         Random random=new Random();
@@ -44,25 +43,6 @@ public class Map {
                 }
             }
         }
-
-        /*//下面这段代码是用来完成测试部分，正式使用时请删除这一部分
-        for(int i=1;i<=rows;i++){
-            for(int j=1;j<=cols;j++){
-
-                if(i == 20 && j == 30 ){
-                    cells[i][j].setStatus(ALIVE);
-                }else if(i == 20 && j == 31 ) {
-                    cells[i][j].setStatus(ALIVE);
-                }else if(i == 21 && j == 30 ) {
-                    cells[i][j].setStatus(ALIVE);
-                }else if(i == 21 && j == 31 ) {
-                    cells[i][j].setStatus(ALIVE);
-                }else{
-                    cells[i][j].setStatus(DEAD);
-                }
-            }
-        }
-*/
     }
 
     //更新下一代生命地图
@@ -148,5 +128,12 @@ public class Map {
                 cells[i][j].setStatus(DEAD);
             }
         }
+    }
+
+    public int getRows() {
+        return rows;
+    }
+    public int getCols(){
+        return cols;
     }
 }

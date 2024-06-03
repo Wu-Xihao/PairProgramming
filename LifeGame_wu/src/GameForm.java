@@ -79,18 +79,7 @@ public class GameForm implements SetForm.SetFormListener{
             }
         });
 
-//        for(int i=0;i<rows;i++){
-//            for(int j=0;j<cols;j++){
-//                int finalI = i;
-//                int finalJ = j;
-//                MapBtns[i][j].addActionListener(new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        clickMapBtn(finalI, finalJ);
-//                    }
-//                });
-//            }
-//        }
+
     }
     public void init(){
         size=20;
@@ -237,7 +226,48 @@ public class GameForm implements SetForm.SetFormListener{
         Frame.setLocationRelativeTo(null);
     }
 
-
+    public int getRows(){
+        return rows;
+    }
+    public int getCols(){
+        return cols;
+    }
+    public Color getAliveColor(){
+        return AliveColor;
+    }
+    public Color getDeadColor(){
+        return DeadColor;
+    }
+    public JButton[][] getMapBtns(){
+        return MapBtns;
+    }
+    public Map getMap(){
+        return map;
+    }
+    public Map getLastMap(){
+        return lastMap;
+    }
+    public int getSize(){
+        return size;
+    }
+    public JFrame getFrame(){
+        return Frame;
+    }
+    public JButton getReadyBtn(){
+        return ReadyBtn;
+    }
+    public JButton getStartBtn(){
+        return StartBtn;
+    }
+    public Timer getTimer() {
+        return timer;
+    }
+    public JButton getStopBtn() {
+        return StopBtn;
+    }
+    public JButton getNextBtn(){
+        return NextBtn;
+    }
 
     public static void main(String[] args){
         GameForm gameForm=new GameForm();
